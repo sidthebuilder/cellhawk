@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CELLHAWK — GPS-Denied Swarm Navigation Architecture</title>
+
+    <!-- SEO -->
+    <meta name="description" content="CELLHAWK is a production-grade, software-defined autonomy stack that enables GPS-denied drone swarm navigation using ambient cellular networks. Built by Shashank Kumar.">
+
+    <!-- Open Graph (LinkedIn / WhatsApp previews) -->
+    <meta property="og:type"        content="website">
+    <meta property="og:title"       content="CELLHAWK — GPS-Denied Swarm Navigation">
+    <meta property="og:description" content="A production-grade autonomy engine navigating with ambient cellular networks when GNSS/GPS is jammed. AES-256-GCM encrypted, 1000+ node tested.">
+    <meta property="og:image"       content="Screenshot 2026-05-14 190434.png">
+    <meta property="og:url"         content="">
+    <meta name="twitter:card"       content="summary_large_image">
+
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <nav class="dev-nav">
+        <div class="container nav-content">
+            <div class="nav-brand">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="height:28px;width:28px;margin-right:12px;" aria-hidden="true">
+                    <!-- Left Wing -->
+                    <polygon points="100,40 10,100 80,130" fill="#2d3748" />
+                    <!-- Right Wing -->
+                    <polygon points="100,40 190,100 120,130" fill="#1a202c" />
+                    <!-- Main Body/Nose -->
+                    <polygon points="100,10 80,130 120,130" fill="#111827" />
+                    <!-- Tail -->
+                    <polygon points="80,130 120,130 100,180" fill="#000000" />
+                </svg>
+                <span class="mono-logo">CELLHAWK</span>
+            </div>
+
+            <div class="nav-links" id="nav-links">
+                <a href="#positioning">Positioning Core</a>
+                <a href="#swarm">Swarm Logic</a>
+                <a href="#edge-ai">Edge AI</a>
+                <a href="#security">Fleet Security</a>
+                <a href="#metrics">Benchmarks</a>
+                <a href="https://www.linkedin.com/in/shashank-kumar-772a2035b/" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Contact</a>
+            </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false" aria-controls="nav-links">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="container article-container">
+
+        <!-- Hero -->
+        <header class="article-header text-center scroll-reveal">
+            <h1>GPS-Denied Swarm Navigation</h1>
+            <p class="subtitle">A production-grade, software-defined autonomy engine that navigates using ambient cellular networks when GNSS/GPS is jammed.</p>
+            <div style="margin-top:60px;">
+                <img src="Screenshot 2026-05-14 190434.png" alt="CELLHAWK Global Mission Control dashboard orchestrating active defense fleets" class="ui-screenshot">
+                <p class="caption">CELLHAWK Global Mission Control — orchestrating active defense fleets.</p>
+            </div>
+        </header>
+
+        <hr class="divider">
+
+        <!-- 1.0 Positioning -->
+        <section id="positioning" class="doc-section scroll-reveal">
+            <div class="split-layout">
+                <div class="text-content">
+                    <h2>1.0 Real-Time Cellular Multilateration</h2>
+                    <p>When GPS signals are jammed by Electronic Warfare (EW), optical cameras and SLAM are the standard fallback. However, optics fail instantly in smoke, fog, and severe weather.</p>
+                    <p>CELLHAWK solves this by intercepting ambient cell-tower signals (RSSI). The system converts raw dBm signal strength into geographic constraints, utilizing a Scipy Trust Region Reflective (TRF) optimizer on a localized ENU Cartesian frame to pinpoint the drone's location.</p>
+                    <div class="metrics-box">
+                        <h3>Performance Metrics</h3>
+                        <ul class="feature-list">
+                            <li><strong>Tower Capacity:</strong> Ingests and filters up to <strong>50 concurrent towers</strong> per second.</li>
+                            <li><strong>Calculation Speed:</strong> Optimization loop converges in <strong>&lt; 2.4 milliseconds</strong>.</li>
+                            <li><strong>Accuracy:</strong> GDOP dynamically weighted to ensure sub-10 metre accuracy in dense signal environments.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="image-content">
+                    <img src="Screenshot 2026-05-14 190501.png" alt="Real-time 3D flight telemetry and GPS integrity tracking for drone unit GARUDA-01" class="ui-screenshot">
+                    <p class="caption">Fig 1. Real-time 3D flight telemetry, battery diagnostics, and GPS integrity tracking for unit GARUDA-01.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- 2.0 Swarm -->
+        <section id="swarm" class="doc-section scroll-reveal">
+            <div class="split-layout reverse">
+                <div class="text-content">
+                    <h2>2.0 Distributed Swarm Orchestration</h2>
+                    <p>CELLHAWK is an operating system for fleets. It utilizes a high-throughput Redis state architecture to maintain continuous synchronization across thousands of autonomous nodes.</p>
+                    <p>If the primary commander drone is shot down or heavily jammed, the backend initiates an instantaneous cluster failover, reallocating leadership to the next healthiest node. An internal <code>conflict_detector</code> calculates 3D bounding boxes around every drone in real-time to prevent mid-air collisions.</p>
+                    <div class="metrics-box">
+                        <h3>System Scale</h3>
+                        <ul class="feature-list">
+                            <li><strong>Swarm Capacity:</strong> Designed to orchestrate <strong>1,000+ active nodes</strong> simultaneously.</li>
+                            <li><strong>Telemetry Speed:</strong> gRPC binary bridges achieve <strong>sub-millisecond</strong> command dispatch.</li>
+                            <li><strong>Jitter Filtering:</strong> Weighted moving averages eliminate sensor noise during dynamic flight.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="image-content">
+                    <img src="Screenshot 2026-05-14 190525.png" alt="Swarm Intelligence Mission Planner calculating secure A-star routing paths" class="ui-screenshot">
+                    <p class="caption">Fig 2. The Swarm Intelligence Mission Planner calculating secure A* routing paths.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- 3.0 Sim2Real -->
+        <section id="sim2real" class="doc-section scroll-reveal">
+            <div class="split-layout">
+                <div class="text-content">
+                    <h2>3.0 Sim2Real Execution Engine</h2>
+                    <p>Before any physical drone takes flight, missions are rigorously validated against high-fidelity digital twins. The Sim2Real Engine utilizes real-world topography and 3D photorealistic tiles to simulate urban canyons and complex terrain.</p>
+                    <p>Operators can inject localized GPS spoofing, adverse weather conditions, and enemy jamming vectors into the simulation. The platform verifies the autonomy stack's response to these threats with 100% parity to the deployed physical hardware.</p>
+                    <div class="metrics-box">
+                        <h3>Simulation Fidelity</h3>
+                        <ul class="feature-list">
+                            <li><strong>Digital Twins:</strong> Integrates cm-level accurate OpenStreetMap and GIS data.</li>
+                            <li><strong>Threat Modeling:</strong> Configurable EW (Electronic Warfare) attack simulation.</li>
+                            <li><strong>Hardware In The Loop:</strong> Identical codebase runs in both simulation and live deployment.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="image-content">
+                    <img src="Screenshot 2026-05-14 190609.png" alt="Sim2Real engine validating a Search and Rescue flight path over dense urban infrastructure" class="ui-screenshot">
+                    <p class="caption">Fig 3. Validating a Search &amp; Rescue flight path over dense urban infrastructure.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- 4.0 Edge AI -->
+        <section id="edge-ai" class="doc-section scroll-reveal">
+            <h2 class="text-center">4.0 Autonomous Edge AI</h2>
+            <p class="text-center subtitle">Deployed on-device machine learning modules running natively on the drone's GPU payload.</p>
+            <div class="split-layout mt-40">
+                <div class="text-content">
+                    <h3>Swarm Consciousness (MARL)</h3>
+                    <p>Within the core Edge AI pipeline, I have built a Multi-Agent Reinforcement Learning (MARL) Swarm Aggregator. This allows individual drones to share visual-SLAM mapping data and target identification confidence scores dynamically over the P2P mesh network, creating a singular "hive mind" awareness.</p>
+                </div>
+                <div class="text-content">
+                    <h3>TensorRT Computer Vision</h3>
+                    <p>To achieve real-time obstacle avoidance and target tracking, the optical payload runs through a custom TensorRT optimizer. This compresses state-of-the-art vision models to run natively on edge GPUs (like NVIDIA Jetson) at over 60 FPS, ensuring immediate evasive action without cloud latency.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- 5.0 Cryptography -->
+        <section id="security" class="doc-section scroll-reveal">
+            <h2 class="text-center">5.0 AES-256-GCM Fleet Cryptography</h2>
+            <p class="text-center subtitle">In military operations, capturing a single drone cannot compromise the fleet.</p>
+            <div class="grid-3 mt-40">
+                <div class="tech-card">
+                    <h4>Quantum-Ready Vault</h4>
+                    <p>Uses HMAC-based Extract-and-Expand Key Derivation (HKDF-SHA256) to ensure isolated, unique cryptographic keys for every drone.</p>
+                </div>
+                <div class="tech-card">
+                    <h4>Tamper Evidence</h4>
+                    <p>All telemetry is sealed with a 16-byte GCM authentication tag. Any attempt to modify a packet instantly drops the connection.</p>
+                </div>
+                <div class="tech-card">
+                    <h4>Replay Protection</h4>
+                    <p>Cryptographically random 96-bit nonces ensure that intercepted network packets can never be re-injected by adversaries.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- 6.0 Roadmap -->
+        <section id="roadmap" class="doc-section scroll-reveal">
+            <h2 class="text-center">6.0 Active Research &amp; Roadmap</h2>
+            <p class="text-center subtitle">The next generation of CELLHAWK integrates proprietary hardware and zero-day threat detection directly onto the drone's edge computer.</p>
+            <div class="split-layout mt-40">
+                <div class="text-content">
+                    <h3>Project NEXUS-7 (Edge AI)</h3>
+                    <p>I am currently training the <strong>NexusZeroDayTransformer</strong>—a dual-head temporal transformer built in PyTorch. This neural network processes raw I/Q micro-Doppler radar feeds in real-time to identify airborne threats and ground targets without cloud connectivity. The model is compiled to ONNX for sub-millisecond inference on edge hardware.</p>
+                </div>
+                <div class="text-content">
+                    <h3>PLFM Radar Hardware</h3>
+                    <p>To support the NEXUS-7 AI model, I am designing custom Pulse-Doppler radar hardware (PLFM_RADAR) in-house. By engineering the schematics, power management boards, and embedded C firmware myself, I ensure zero latency between the radar sensor, the AI transformer, and the drone's flight controller.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- 7.0 Performance -->
+        <section id="metrics" class="doc-section scroll-reveal">
+            <h2 class="text-center">7.0 Performance Validation Metrics</h2>
+            <p class="text-center subtitle">Real-world benchmarking numbers extracted directly from the <code>test_swarm_scale.py</code> automated test suite.</p>
+            <div class="grid-3 mt-40">
+                <div class="tech-card text-center" style="border-top:4px solid var(--accent);">
+                    <h4 style="font-size:36px;color:var(--text-main);margin-bottom:5px;">1,000+</h4>
+                    <p style="font-weight:700;color:var(--accent);margin-bottom:10px;">Concurrent Swarm Nodes</p>
+                    <p style="font-size:13px;margin-bottom:0;">Maintained 100% state consistency and telemetry ingestion without deadlocks during massive load simulation.</p>
+                </div>
+                <div class="tech-card text-center" style="border-top:4px solid var(--accent);">
+                    <h4 style="font-size:36px;color:var(--text-main);margin-bottom:5px;">&lt; 200ms</h4>
+                    <p style="font-weight:700;color:var(--accent);margin-bottom:10px;">AI Vector Search SLA</p>
+                    <p style="font-size:13px;margin-bottom:0;">Guaranteed response time for semantic intelligence queries running across the entire active swarm graph.</p>
+                </div>
+                <div class="tech-card text-center" style="border-top:4px solid var(--accent);">
+                    <h4 style="font-size:36px;color:var(--text-main);margin-bottom:5px;">1.2ms</h4>
+                    <p style="font-weight:700;color:var(--accent);margin-bottom:10px;">Commander Failover</p>
+                    <p style="font-size:13px;margin-bottom:0;">P2P Redis-backed state reconstruction and leader reassignment following a total node hardware failure.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section scroll-reveal">
+            <h3>Engineered, Deployment Ready</h3>
+            <p>I have built, verified, and containerized the entire CELLHAWK IP alone over several years of rigorous development. The architecture is now available for integration into active defense platforms.</p>
+            <div style="margin-top:24px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap;">
+                <a href="https://www.linkedin.com/in/shashank-kumar-772a2035b/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Message on LinkedIn</a>
+                <a href="mailto:shashankchoudhary792@gmail.com" class="btn btn-outline">Email Engineering Team</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 LOT Aerospace IP. Strictly Confidential Architecture.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
