@@ -21,4 +21,4 @@ This architecture was built, verified, and containerized by a solo engineer over
 - **Email:** shashankchoudhary792@gmail.com
 
 ---
-*Strictly Confidential Architecture. © 2026 LOT Aerospace IP.*
+*Proprietary Architecture & Intellectual Property. © 2026 LOT Aerospace IP.*
