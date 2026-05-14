@@ -228,14 +228,40 @@ p  { margin-bottom: 20px; color: var(--text-muted); font-size: 16px; }
 .cta-section h3 { margin-top: 0; font-size: 24px; }
 
 /* ── Footer ─────────────────────────────────────────────────────── */
-footer {
-    padding: 40px 0;
-    margin-top: 40px;
-    border-top: 1px solid var(--border-color);
-    text-align: center;
+.premium-footer {
+    padding: 60px 0;
+    background: #0a0a0a;
+    color: #4b5563;
+    border-top: 1px solid #1f2937;
+    margin-top: 80px;
+}
+
+.footer-legal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.footer-legal p {
     font-family: var(--font-mono);
-    font-size: 12px;
-    color: #9ca3af;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    margin-bottom: 0;
+    color: #6b7280;
+    text-transform: uppercase;
+}
+
+.auth-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.15em;
+    opacity: 0.8;
 }
 
 /* ── Responsive — Tablet (768px) ────────────────────────────────── */
