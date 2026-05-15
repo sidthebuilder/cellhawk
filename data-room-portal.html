@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CELLHAWK | Technical Audit Portfolio</title>
+    <style>
+        body { background: #000; color: #f5f5f7; font-family: 'Inter', -apple-system, sans-serif; margin: 0; padding: 0; }
+        .vdr-header { padding: 60px 40px 20px 40px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: flex-end; }
+        .folder { margin: 30px 40px; background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; }
+        .folder-header { padding: 12px 20px; background: rgba(255,255,255,0.04); font-weight: 600; font-size: 12px; color: #86868b; text-transform: uppercase; letter-spacing: 0.1em; }
+        .file-list { list-style: none; padding: 0; margin: 0; }
+        .file-item { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.2s; }
+        .file-item:hover { background: rgba(255,255,255,0.02); }
+        .btn-audit { background: #2997ff; color: #fff; border: none; padding: 8px 18px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 13px; transition: 0.2s; text-decoration: none; }
+        .btn-audit:hover { background: #0071e3; transform: scale(0.98); }
+    </style>
+</head>
+<body>
+    <div class="vdr-header">
+        <div>
+            <h2 style="margin:0; font-size: 32px; letter-spacing: -0.02em;">Project CELLHAWK</h2>
+            <p style="margin:5px 0 0 0; color:#86868b; font-size:15px;">Technical Audit Portfolio | Open for Strategic Review</p>
+        </div>
+        <div style="text-align:right;">
+            <div style="font-family:'SF Mono', monospace; font-size:11px; color:#86868b;">REF_ID: AUDIT-NX7-OPEN</div>
+            <div style="color:#30d158; font-size:11px; font-weight:600; margin-top:4px;">● PUBLIC_AUDIT_MODE</div>
+        </div>
+    </div>
+
+    <!-- 01. STRATEGIC AUDIT -->
+    <div class="folder">
+        <div class="folder-header">01_Strategic_&_Compliance_Audit</div>
+        <ul class="file-list">
+            <li class="file-item">
+                <div>
+                    <div style="font-weight:600; font-size:15px;">01_01_Strategic_Market_Gap_Analysis.pdf</div>
+                    <div style="font-size:13px; color:#86868b; margin-top:4px;">Identifying the GPS-Failure and Low-RCS detection bottlenecks.</div>
+                </div>
+                <a href="Strategic_Market_Analysis.html" target="_blank" class="btn-audit">Audit View</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 02. TECHNICAL AUDIT -->
+    <div class="folder">
+        <div class="folder-header">02_Technical_IP_Audit</div>
+        <ul class="file-list">
+            <li class="file-item">
+                <div>
+                    <div style="font-weight:600; font-size:15px;">02_01_Cellular_TDOA_Positioning_Algorithm.pdf</div>
+                    <div style="font-size:13px; color:#86868b; margin-top:4px;">TRF Non-Linear Least Squares solver for GPS-independent nav.</div>
+                </div>
+                <a href="Positioning_Algorithm_Audit.html" target="_blank" class="btn-audit">Audit View</a>
+            </li>
+            <li class="file-item">
+                <div>
+                    <div style="font-weight:600; font-size:15px;">02_02_Dual_Head_Temporal_Transformer_AI.pdf</div>
+                    <div style="font-size:13px; color:#86868b; margin-top:4px;">Zero-Day Anomaly Detection logic for unknown radar targets.</div>
+                </div>
+                <a href="Edge_AI_Zero_Day_Audit.html" target="_blank" class="btn-audit">Audit View</a>
+            </li>
+            <li class="file-item">
+                <div>
+                    <div style="font-weight:600; font-size:15px;">02_03_Multi_Spectral_Thermal_Vision_Audit.pdf</div>
+                    <div style="font-size:13px; color:#86868b; margin-top:4px;">White-Hot thermal signature processing for night-ops.</div>
+                </div>
+                <a href="Thermal_Vision_Audit.html" target="_blank" class="btn-audit">Audit View</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 03. SECURITY AUDIT -->
+    <div class="folder">
+        <div class="folder-header">03_Security_Hardening_Audit</div>
+        <ul class="file-list">
+            <li class="file-item">
+                <div>
+                    <div style="font-weight:600; font-size:15px;">03_01_Hardware_Root_of_Trust_&_mTLS.pdf</div>
+                    <div style="font-size:13px; color:#86868b; margin-top:4px;">TPM 2.0 integration and encrypted gRPC internal streams.</div>
+                </div>
+                <a href="Security_Hardening_Audit.html" target="_blank" class="btn-audit">Audit View</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 04. RESTRICTED -->
+    <div class="folder">
+        <div class="folder-header">04_Restricted_M&A_Assets</div>
+        <ul class="file-list">
+            <li class="file-item">
+                <div>
+                    <div style="font-weight:600; font-size:15px;">04_01_Confidential_Financial_Model.rpt</div>
+                    <div style="font-size:13px; color:#86868b; margin-top:4px;">Restricted: Contact founder for cap table and R&D projections.</div>
+                </div>
+                <a href="mailto:shashankchoudhary792@gmail.com?subject=Financial Data Request" class="btn-audit" style="background:#444;">Request</a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

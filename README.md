@@ -20,5 +20,13 @@ This architecture was built, verified, and containerized by a solo engineer over
 - **LinkedIn:** [Message on LinkedIn](https://www.linkedin.com/in/shashank-kumar-772a2035b/)
 - **Email:** shashankchoudhary792@gmail.com
 
+## Technical Data Room
+A private data room containing the following documents is available for verified strategic partners:
+- **Architecture Deep-Dive:** System flow, component interaction, and API specifications.
+- **IP & Security Audit:** Mathematical models (LDPL, WLS/TRF) and mTLS/AES-256-GCM implementation details.
+- **Strategic Market Positioning:** Competitor comparison and Docker-based deployment guide.
+
+To request access, please contact the developer directly.
+
 ---
-*Proprietary Architecture & Intellectual Property. © 2026 LOT Aerospace IP.*
+*Proprietary Architecture & Intellectual Property. © 2026 Shashank Kumar.*

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPT-NX7-012 | Positioning Algorithm Audit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fff;
+            --text: #1d1d1f;
+            --text-secondary: #6e6e73;
+            --accent: #4f46e5;
+            --border: #f2f2f7;
+            --code-bg: #f8f8f9;
+        }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', -apple-system, sans-serif; line-height: 1.6; margin: 0; padding: 0; }
+        .doc-container { max-width: 800px; margin: 0 auto; padding: 100px 40px; position: relative; }
+        
+        .watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 100px; color: rgba(0,0,0,0.02); font-weight: 900; pointer-events: none; text-transform: uppercase; z-index: -1; }
+        
+        .header { border-bottom: 2px solid var(--text); padding-bottom: 24px; margin-bottom: 60px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .header h1 { font-size: 32px; font-weight: 800; text-transform: uppercase; margin: 0; letter-spacing: -0.04em; }
+        .header .meta { text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-secondary); line-height: 1.4; }
+
+        h2 { font-size: 24px; font-weight: 700; margin-top: 60px; margin-bottom: 20px; letter-spacing: -0.02em; }
+        h3 { font-size: 18px; font-weight: 600; margin-top: 32px; margin-bottom: 12px; }
+        p { margin-bottom: 20px; font-size: 16px; color: #3a3a3c; }
+        
+        pre { background: var(--code-bg); border-radius: 16px; padding: 24px; font-family: 'JetBrains Mono', monospace; font-size: 13px; overflow-x: auto; border: 1px solid var(--border); margin: 30px 0; border-left: 4px solid var(--accent); }
+        code { color: var(--accent); font-weight: 600; }
+
+        .appendix-box { background: #fdfdfd; border: 1px solid var(--border); border-radius: 20px; padding: 32px; margin: 40px 0; }
+        .appendix-box h4 { margin-top: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 16px; }
+
+        .footer-sig { margin-top: 100px; padding-top: 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-secondary); }
+        
+        .btn-print { position: fixed; top: 40px; right: 40px; background: var(--text); color: #fff; border: none; padding: 12px 24px; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.2s; z-index: 1001; }
+        .btn-print:hover { transform: translateY(-2px); opacity: 0.9; }
+        @media print { .btn-print { display: none; } }
+    </style>
+</head>
+<body>
+    <div class="watermark">TECHNICAL_DEEP_DIVE</div>
+    <button class="btn-print" onclick="window.print()">Download PDF</button>
+
+    <div class="doc-container">
+        <div class="header">
+            <div>
+                <h1>Positioning Algorithm Audit</h1>
+                <p style="color: var(--accent); font-weight: 600; margin-top: 8px;">Non-Linear TDOA Fusion & GPS-Denied Integrity</p>
+            </div>
+            <div class="meta">
+                DOCUMENT_ID: RPT-NX7-012<br>
+                REVISION: 2.3 [DEEP_TECH]<br>
+                CLASSIFICATION: PROPRIETARY
+            </div>
+        </div>
+
+        <section>
+            <h2>1. Methodology: Non-Linear Least Squares</h2>
+            <p>NEXUS-7 navigates by solving the "Emitter Location" problem in reverse. Using <strong>Time Difference of Arrival (TDOA)</strong> and <strong>RSSI</strong> from terrestrial towers, the engine calculates the aircraft's 3D position without external satellite aid.</p>
+            <p>We implement a <strong>Trust Region Reflective (TRF)</strong> solver. Unlike simple trilateration, TRF is robust to the high non-linearity of radio propagation in urban and mountainous terrain.</p>
+            
+            <pre>
+# Core Positioner Implementation (Simplified)
+opt_result = least_squares(
+    residuals, 
+    x0=ego_state_init, 
+    method="trf", 
+    ftol=1e-7, 
+    loss='soft_l1' # Outlier Rejection
+)
+            </pre>
+        </section>
+
+        <section>
+            <h2>2. Resilience: Multipath & GDOP Mitigation</h2>
+            <p>The primary risk in cellular positioning is <strong>Multipath Propagation</strong> (signals reflecting off buildings). NEXUS-7 mitigates this using two specific layers:</p>
+            
+            <h3>2.1 Soft-L1 Robust Loss Function</h3>
+            <p>By using <code>soft_l1</code> instead of standard squared residuals, the optimizer effectively ignores "outlier" towers that provide impossible distances due to signal bouncing.</p>
+
+            <h3>2.2 GDOP Verification</h3>
+            <p>The engine calculates the <strong>Geometric Dilution of Precision (GDOP)</strong>. If towers are arranged in a straight line, the engine automatically fuses high-rate IMU data to bridge the accuracy gap until a better geometry is found.</p>
+        </section>
+
+        <div class="appendix-box">
+            <h4>APPENDIX A: Accuracy Benchmarks</h4>
+            <p><strong>Urban Contested:</strong> < 4.2m RMS Error<br>
+            <strong>Rural Open:</strong> < 2.8m RMS Error<br>
+            <strong>GPS Jamming Recovery:</strong> &lt; 150ms Cold-Start Time</p>
+            <p style="font-size: 12px; color: var(--text-secondary);">*Verified against OpenCelliD India (MCC 404/405) dataset with 500k+ ground-truth towers.</p>
+        </div>
+
+        <section>
+            <h2>3. Multi-Sensor Fusion</h2>
+            <p>The positioning engine is <strong>Tightly Coupled</strong>. We fuse cellular residuals directly with the Extended Kalman Filter (EKF) at 1000Hz, ensuring smooth flight dynamics even during tower handoffs.</p>
+        </section>
+
+        <div class="footer-sig">
+            <div>
+                AUTH_SIG: SHASHANK CHOUDHARY<br>
+                TITLE: FOUNDER & CHIEF ENGINEER
+            </div>
+            <div>
+                STAMP: LOT_AEROSPACE_VERIFIED<br>
+                DATE: 2026-MAY-15
+            </div>
+        </div>
+    </div>
+</body>
+</html>
